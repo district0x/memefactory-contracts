@@ -1,6 +1,7 @@
 pragma solidity ^0.4.18;
+import "zos-lib/contracts/Initializable.sol";
 
-contract Controlled {
+contract Controlled is Initializable {
 
   event ControllerChangedEvent(address newController);
 
@@ -10,7 +11,15 @@ contract Controlled {
 
   address public controller;
 
-  function Controlled() public { controller = msg.sender;}
+  /* function Controlled() public { controller = msg.sender;} */
+
+  function initialize()
+    initializer
+    public {
+
+    controller = msg.sender;
+
+  }
 
   /// @notice Changes the controller of the contract
   /// @param _newController The new controller of the contract

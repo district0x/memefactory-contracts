@@ -12,12 +12,6 @@ import "zos-lib/contracts/Initializable.sol";
 contract DankToken is Initializable, MiniMeToken {
 
   function initialize(address _tokenFactory,
-                      /* address _parentToken, */
-                      /* uint _parentSnapShotBlock, */
-                      /* string _tokenName, */
-                      /* uint8 _decimalUnits, */
-                      /* string _tokenSymbol, */
-                      /* bool _transfersEnabled, */
                       uint _mintedAmount)
     initializer
     public {
@@ -31,15 +25,6 @@ contract DankToken is Initializable, MiniMeToken {
                 "DANK",
                 true
                 );
-
-    /* tokenFactory = MiniMeTokenFactory(_tokenFactory); */
-    /* name = "Dank Token"; */
-    /* decimals = 18; */
-    /* symbol = "DANK"; */
-    /* parentToken = MiniMeToken(_parentToken); */
-    /* parentSnapShotBlock = 0; */
-    /* transfersEnabled = true; */
-    /* creationBlock = block.number; */
 
     generateTokens(msg.sender, _mintedAmount);
     changeController(0x0);

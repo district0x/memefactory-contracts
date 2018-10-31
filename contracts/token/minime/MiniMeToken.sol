@@ -133,6 +133,9 @@ contract MiniMeToken is
                       )
     initializer
     public returns (MiniMeToken) {
+
+    Controlled.initialize();
+
     tokenFactory = MiniMeTokenFactory(_tokenFactory);
     name = _tokenName;                                 // Set the name
     decimals = _decimalUnits;                          // Set the decimals
@@ -595,7 +598,7 @@ contract MiniMeTokenFactory {
       _tokenSymbol,
       _transfersEnabled
     );
-   
+
     newToken.changeController(msg.sender);
     return newToken;
   }
