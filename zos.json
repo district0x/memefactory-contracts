@@ -3,6 +3,9 @@
   "name": "memefactory-contracts",
   "version": "0.1.0",
   "contracts": {
-    "MemeFactory": "MemeFactory"
+    "ds-auth": "DSAuth",
+    "ds-guard": "DSGuard",
+    "MemeFactory": "MemeFactory",
+    "meme-registry-db": "EternalDb"
   }
 }

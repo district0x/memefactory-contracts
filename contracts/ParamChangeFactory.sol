@@ -2,6 +2,7 @@ pragma solidity ^0.4.24;
 
 import "./RegistryEntryFactory.sol";
 import "./ParamChange.sol";
+import "zos-lib/contracts/Initializable.sol";
 
 /**
  * @title Factory contract for creating ParamChange contracts
@@ -9,13 +10,25 @@ import "./ParamChange.sol";
  * @dev Users submit new TCR parameter changes into this contract.
  */
 
-contract ParamChangeFactory is RegistryEntryFactory {
-  uint public constant version = 1;
+contract ParamChangeFactory is Initializable, RegistryEntryFactory {
+  uint public version;// = 1;
 
-  function ParamChangeFactory(Registry _registry, MiniMeToken _registryToken)
-  RegistryEntryFactory(_registry, _registryToken)
-  {}
+  /* function ParamChangeFactory(Registry _registry, MiniMeToken _registryToken) */
+  /* RegistryEntryFactory(_registry, _registryToken) */
+  /* {} */
 
+  function initialize(
+    Registry _registry,
+    MiniMeToken _registryToken,
+    uint _version)  
+  initializer
+  public
+  {
+    registry = _registry;
+    registryToken = _registryToken;
+    version = _version;
+  }
+  
   /**
    * @dev Creates new ParamChange forwarder contract and add it into the registry
    * It initializes forwarder contract with initial state. For comments on each param, see ParamChange::construct
