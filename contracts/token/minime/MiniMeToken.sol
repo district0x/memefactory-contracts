@@ -132,7 +132,7 @@ contract MiniMeToken is
                       bool _transfersEnabled
                       )
     initializer
-    public {
+    public returns (MiniMeToken) {
     tokenFactory = MiniMeTokenFactory(_tokenFactory);
     name = _tokenName;                                 // Set the name
     decimals = _decimalUnits;                          // Set the decimals
@@ -141,6 +141,8 @@ contract MiniMeToken is
     parentSnapShotBlock = _parentSnapShotBlock;
     transfersEnabled = _transfersEnabled;
     creationBlock = block.number;
+
+    return this;
   }
 
   ///////////////////
@@ -582,7 +584,9 @@ contract MiniMeTokenFactory {
     /*   _transfersEnabled */
     /* ); */
 
-    MiniMeToken newToken = MiniMeToken.initialize(
+    MiniMeToken newToken = new MiniMeToken();
+
+      newToken.initialize(
       this,
       _parentToken,
       _snapshotBlock,
