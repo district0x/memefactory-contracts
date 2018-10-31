@@ -1,0 +1,8 @@
+{
+  "zosversion": "2",
+  "name": "memefactory-contracts",
+  "version": "0.1.0",
+  "contracts": {
+    "MemeFactory": "MemeFactory"
+  }
+}
