@@ -2,7 +2,7 @@ pragma solidity ^0.4.18;
 
 import "./ERC721.sol";
 import "./ERC721BasicToken.sol";
-
+import "zos-lib/contracts/Initializable.sol";
 
 /**
  * @title Full ERC721 Token
@@ -10,7 +10,7 @@ import "./ERC721BasicToken.sol";
  * Moreover, it includes approve all functionality using operator terminology
  * @dev see https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md
  */
-contract ERC721Token is ERC721, ERC721BasicToken {
+contract ERC721Token is Initializable, ERC721, ERC721BasicToken {
   // Token name
   string internal name_;
 
@@ -33,9 +33,15 @@ contract ERC721Token is ERC721, ERC721BasicToken {
   mapping(uint256 => address) internal tokenURIs;
 
   /**
-  * @dev Constructor function
-  */
-  function ERC721Token(string _name, string _symbol) public {
+   * @dev Constructor function
+   */
+  /* function ERC721Token(string _name, string _symbol) public { */
+  /*   name_ = _name; */
+  /*   symbol_ = _symbol; */
+  /* } */
+  function initialize(string _name, string _symbol)
+    initializer
+    public {
     name_ = _name;
     symbol_ = _symbol;
   }

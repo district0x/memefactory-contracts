@@ -3,6 +3,7 @@ pragma solidity ^0.4.24;
 import "./token/ERC721Token.sol";
 import "./Registry.sol";
 import "./auth/DSAuth.sol";
+import "zos-lib/contracts/Initializable.sol";
 
 /**
  * @title Token of a Meme. Contract is deployed with each Meme submission.
@@ -11,7 +12,7 @@ import "./auth/DSAuth.sol";
  * pointing into single intance of it.
  */
 
-contract MemeToken is ERC721Token {
+contract MemeToken is Initializable, ERC721Token {
   Registry public registry;
 
   modifier onlyRegistryEntry() {
@@ -19,9 +20,16 @@ contract MemeToken is ERC721Token {
     _;
   }
 
-  function MemeToken(Registry _registry)
-  ERC721Token("MemeToken", "MEME")
-  {
+  /* function MemeToken(Registry _registry) */
+  /* ERC721Token("MemeToken", "MEME") */
+  /* { */
+  /*   registry = _registry; */
+  /* } */
+  function initialize(Registry _registry)
+    initializer
+    public {
+
+    ERC721Token.initialize("MemeToken", "MEME");
     registry = _registry;
   }
 

@@ -25,14 +25,17 @@ contract MemeFactory is Initializable, RegistryEntryFactory {
     Registry _registry,
     MiniMeToken _registryToken,
     MemeToken _memeToken,
-    uint _version)  
+    uint _version)
   initializer
   public
   {
+
+    RegistryEntryFactory.initialize(_registry, _registryToken);
+
     memeToken = _memeToken;
     version =_version;
   }
-  
+
   /**
    * @dev Creates new Meme forwarder contract and add it into the registry
    * It initializes forwarder contract with initial state. For comments on each param, see Meme::construct
