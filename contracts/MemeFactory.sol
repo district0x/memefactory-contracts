@@ -3,6 +3,7 @@ pragma solidity ^0.4.24;
 import "./RegistryEntryFactory.sol";
 import "./Meme.sol";
 import "./MemeToken.sol";
+import "zos-lib/contracts/Initializable.sol";
 
 /**
  * @title Factory contract for creating Meme contracts
