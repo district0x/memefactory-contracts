@@ -3,9 +3,10 @@
   "name": "memefactory-contracts",
   "version": "0.1.0",
   "contracts": {
-    "ds-auth": "DSAuth",
     "ds-guard": "DSGuard",
-    "MemeFactory": "MemeFactory",
-    "meme-registry-db": "EternalDb"
+    "meme-registry-db": "EternalDb",
+    "meme-registry": "Registry",
+    "minime-token-factory": "MiniMeTokenFactory",
+    "DANK": "DankToken"
   }
 }

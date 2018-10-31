@@ -27,6 +27,7 @@ pragma solidity ^0.4.18;
 
 import "./Controlled.sol";
 import "./TokenController.sol";
+import "zos-lib/contracts/Initializable.sol";
 
 contract ApproveAndCallFallBack {
   function receiveApproval(address from, uint256 _amount, address _token, bytes _data) public;
@@ -35,7 +36,7 @@ contract ApproveAndCallFallBack {
 /// @dev The actual token contract, the default controller is the msg.sender
 ///  that deploys the contract, so usually this token will be deployed by a
 ///  token controller contract, which Giveth will call a "Campaign"
-contract MiniMeToken is Controlled {
+contract MiniMeToken is Initializable, Controlled {
 
   string public name;                //The Token's name: e.g. DigixDAO Tokens
   uint8 public decimals;             //Number of decimals of the smallest unit
@@ -100,7 +101,7 @@ contract MiniMeToken is Controlled {
   /// @param _decimalUnits Number of decimals of the new token
   /// @param _tokenSymbol Token Symbol for the new token
   /// @param _transfersEnabled If true, tokens will be able to be transferred
-  function MiniMeToken(
+  constructor(
     address _tokenFactory,
     address _parentToken,
     uint _parentSnapShotBlock,
@@ -119,6 +120,26 @@ contract MiniMeToken is Controlled {
     creationBlock = block.number;
   }
 
+  /* function initialize( */
+  /*                     address _tokenFactory, */
+  /*                     address _parentToken, */
+  /*                     uint _parentSnapShotBlock, */
+  /*                     string _tokenName, */
+  /*                     uint8 _decimalUnits, */
+  /*                     string _tokenSymbol, */
+  /*                     bool _transfersEnabled */
+  /*                     )   */
+  /*   initializer */
+  /*   public { */
+  /*   tokenFactory = MiniMeTokenFactory(_tokenFactory); */
+  /*   name = _tokenName;                                 // Set the name */
+  /*   decimals = _decimalUnits;                          // Set the decimals */
+  /*   symbol = _tokenSymbol;                             // Set the symbol */
+  /*   parentToken = MiniMeToken(_parentToken); */
+  /*   parentSnapShotBlock = _parentSnapShotBlock; */
+  /*   transfersEnabled = _transfersEnabled; */
+  /*   creationBlock = block.number; */
+  /* }- */
 
   ///////////////////
   // ERC20 Methods
@@ -548,6 +569,7 @@ contract MiniMeTokenFactory {
     string _tokenSymbol,
     bool _transfersEnabled
   ) public returns (MiniMeToken) {
+
     MiniMeToken newToken = new MiniMeToken(
       this,
       _parentToken,
@@ -558,6 +580,16 @@ contract MiniMeTokenFactory {
       _transfersEnabled
     );
 
+    /* MiniMeToken newToken = MiniMeToken.initialize( */
+    /*   this, */
+    /*   _parentToken, */
+    /*   _snapshotBlock, */
+    /*   _tokenName, */
+    /*   _decimalUnits, */
+    /*   _tokenSymbol, */
+    /*   _transfersEnabled */
+    /* ); */
+    
     newToken.changeController(msg.sender);
     return newToken;
   }

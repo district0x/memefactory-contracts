@@ -11,7 +11,7 @@ import "zos-lib/contracts/Initializable.sol";
  * It also provides way set/get multiple values in single transaction
  */
 
-contract EternalDb is DSAuth {
+contract EternalDb is Initializable, DSAuth {
 
   enum Types {UInt, String, Address, Bytes, Bytes32, Boolean, Int}
 

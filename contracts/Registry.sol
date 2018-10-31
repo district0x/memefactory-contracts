@@ -3,6 +3,7 @@ pragma solidity ^0.4.24;
 import "./auth/DSAuth.sol";
 import "./db/EternalDb.sol";
 import "./proxy/MutableForwarder.sol"; // Keep it included despite not being used (for compiler)
+import "zos-lib/contracts/Initializable.sol";
 
 /**
  * @title Central contract for TCR registry
@@ -12,7 +13,7 @@ import "./proxy/MutableForwarder.sol"; // Keep it included despite not being use
  * This contract is not accessed directly, but through MutableForwarder. See MutableForwarder.sol for more comments.
  */
 
-contract Registry is DSAuth {
+contract Registry is Initializable, DSAuth {
   address public target; // Keep it here, because this contract is deployed as MutableForwarder
 
   event MemeConstructedEvent(address registryEntry, uint version, address creator, bytes metaHash, uint totalSupply, uint deposit, uint challengePeriodEnd);
@@ -46,16 +47,26 @@ contract Registry is DSAuth {
 
    * @param _db Address of EternalDb related to this registry
    */
-  function construct(EternalDb _db)
-  external
-  {
+  /* function construct(EternalDb _db) */
+  /* external */
+  /* { */
+  /*   require(address(_db) != 0x0, "Registry: Address can't be 0x0"); */
+
+  /*   db = _db; */
+  /*   wasConstructed = true; */
+  /*   owner = msg.sender; */
+  /* } */
+
+  function initialize(EternalDb _db)
+    initializer
+    public {
     require(address(_db) != 0x0, "Registry: Address can't be 0x0");
 
     db = _db;
     wasConstructed = true;
     owner = msg.sender;
   }
-
+  
   modifier onlyFactory() {
     require(isFactory(msg.sender), "Registry: Sender should be factory");
     _;
