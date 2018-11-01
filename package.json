@@ -1,21 +1,24 @@
 {
   "name": "memefactory-contracts",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "MemeFactory smart contracts packaged as a reusable EVM Package",
+  "author": "fbielejec",
+  "license": "Eclipse Public License",
+  "homepage": "https://github.com/district0x/memefactory-contracts#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/district0x/memefactory-contracts.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/district0x/memefactory-contracts/issues"
   },
-  "homepage": "https://github.com/district0x/memefactory-contracts#readme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dev-dependencies": {
+    "ganache-cli": "^6.1.8"
+  }
   "dependencies": {
     "zos-lib": "^2.0.1"
   }
