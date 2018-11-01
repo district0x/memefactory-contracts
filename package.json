@@ -14,11 +14,11 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ganache": "ganache-cli -p 8549"
   },
   "dev-dependencies": {
     "ganache-cli": "^6.1.8"
-  }
+  },
   "dependencies": {
     "zos-lib": "^2.0.1"
   }
