@@ -12,10 +12,15 @@
   "bugs": {
     "url": "https://github.com/district0x/memefactory-contracts/issues"
   },
-  "main": "index.js",
+  "files": [
+    "build",
+    "contracts",
+    "test",
+    "zos.json"
+  ],
   "scripts": {
-    "start": "npx truffle compile && npx truffle --network local exec index.js",
-    "ganache": "ganache-cli -p 8549"
+    "ganache": "ganache-cli -p 8549",
+    "start": "npx truffle compile && npx truffle --network local exec index.js"
   },
   "dev-dependencies": {
     "ganache-cli": "^6.1.8"

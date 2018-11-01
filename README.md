@@ -2,7 +2,7 @@
 
 # Meme Factory EVM Package
 
-<!-- [![NPM Package](https://img.shields.io/npm/v/memefactory-contracts.svg?style=flat-square)](https://www.npmjs.org/package/memefactory-contracts) -->
+[![NPM Package](https://img.shields.io/npm/v/memefactory-contracts.svg?style=flat-square)](https://www.npmjs.org/package/memefactory-contracts)
 
 This repository contains [MemeFactory](https://memefactory.io/) smart contracts packaged as a reusable EVM Package.
 You can deploy them as-is, or extend to suit your needs to build custom contracts and more complex decentralized systems.
@@ -52,7 +52,7 @@ zos add MemeFactory:meme-factory
 Start session with a network called `local` (defined in truffle-config):
 
 ```bash
-zos session --network local --from 0x90f8bf6a479f320ead074411a4b0e7944ea8c9c1 --expires 3600
+zos session --network local --from <address> --expires 3600
 ```
 
 Deploy all the added logic contracts to the network:
@@ -93,9 +93,9 @@ npx truffle console --network local
 ```
 
 ```bash
-var address='0xe8e43b5d61c43375ab7b651f1419f2a81c5e6615';
+var address='contract-instance-address';
 memeFactory=MemeFactory.at(address)
-var opts = {from: '0xffcf8fdee72ac11b5c542428b35eef5769c409f0'};
+var opts = {from: 'address'};
 memeFactory.version(opts)
 ```
 
