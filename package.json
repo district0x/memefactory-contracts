@@ -14,6 +14,7 @@
   },
   "main": "index.js",
   "scripts": {
+    "start": "npx truffle compile && npx truffle --network local exec index.js",
     "ganache": "ganache-cli -p 8549"
   },
   "dev-dependencies": {
