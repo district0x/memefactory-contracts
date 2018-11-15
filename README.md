@@ -36,29 +36,23 @@ npm install --global zos
 
 ### development
 
-Add contracts:
+Create a new ZeppelinOS project, and add the `memefactory-contracts` EVM package:
 
 ```bash
-zos add DSAuth:ds-auth
-zos add DSGuard:ds-guard
-zos add EternalDb:meme-registry-db
-zos add Registry:meme-registry
-zos add MiniMeTokenFactory:minime-token-factory
-zos add DankToken:DANK
-zos add MemeToken:meme-token
-zos add MemeFactory:meme-factory
+zos init MyProject
+zos link memefactory-contracts
 ```
 
-Start session with a network called `local` (defined in truffle-config):
+Start session with a network called `local` (defined in truffle-config), using an address [different from the default](https://docs.zeppelinos.org/docs/pattern.html#transparent-proxies-and-function-clashes):
 
 ```bash
 zos session --network local --from <address> --expires 3600
 ```
 
-Deploy all the added logic contracts to the network:
+Deploy all the added logic contracts to the network (note that this step is only needed on local networks, when working on public networks ZeppelinOS will automatically used the pre-deployed implementation contracts):
 
 ```bash
-zos push
+zos push --deploy-dependencies
 ```
 
 Deploy upgradeable instances of the contracts:
@@ -74,10 +68,11 @@ MEME_FACTORY=$(zos create meme-factory --init --args $REGISTRY,$MINI_ME_TOKEN,$M
 
 ### Update contracts
 
-Deploy change to logic contracts:
+Update to a new version of the package and deploy changes to logic contracts:
 
 ```bash
-zos push
+zos link memefactory-contracts@new-version
+zos push --deploy-dependencies
 ```
 
 Deploy updated instances of the contracts to interact with:
