@@ -2,6 +2,7 @@ pragma solidity ^0.4.24;
 
 import "./token/minime/MiniMeToken.sol";
 import "zos-lib/contracts/Initializable.sol";
+import "zos-lib/contracts/application/App.sol";
 
 /**
  * @title Token used for curation of MemeFactory TCR
@@ -11,7 +12,7 @@ import "zos-lib/contracts/Initializable.sol";
 
 contract DankToken is Initializable, MiniMeToken {
 
-  function initialize(address _tokenFactory,
+  function initialize(App _tokenFactory,
                       uint _mintedAmount)
     initializer
     public {

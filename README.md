@@ -61,9 +61,10 @@ Deploy upgradeable instances of the contracts:
 DB=$(zos create meme-registry-db --init initialize)
 REGISTRY=$(zos create meme-registry --init --args $DB)
 MINI_ME_TOKEN_FACTORY=$(zos create minime-token-factory)
-MINI_ME_TOKEN=$(zos create DANK --init --args $MINI_ME_TOKEN_FACTORY,1000000000000000000000000000)
+TOKEN_FACTORY=$(zos create token-factory) && echo $TOKEN_FACTORY
+DANK_TOKEN=$(zos create DANK --init --args $TOKEN_FACTORY,1000000000000000000000000000)
 MEME_TOKEN=$(zos create meme-token --init --args $REGISTRY)
-MEME_FACTORY=$(zos create meme-factory --init --args $REGISTRY,$MINI_ME_TOKEN,$MEME_TOKEN,1)
+MEME_FACTORY=$(zos create meme-factory --init --args $REGISTRY,$DANK_TOKEN,$MEME_TOKEN,1)
 ```
 
 ### Update contracts

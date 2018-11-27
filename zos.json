@@ -7,9 +7,9 @@
     "ds-guard": "DSGuard",
     "meme-registry-db": "EternalDb",
     "meme-registry": "Registry",
-    "minime-token-factory": "MiniMeTokenFactory",
     "DANK": "DankToken",
     "meme-token": "MemeToken",
-    "meme-factory": "MemeFactory"
+    "meme-factory": "MemeFactory",
+    "token-factory": "App"
   }
 }
