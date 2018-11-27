@@ -98,7 +98,7 @@ contract MiniMeToken is
   ///  new token
   /// @param _parentSnapShotBlock Block of the parent token that will
   ///  determine the initial distribution of the clone token, set to 0 if it
-  ///  is a new token1
+  ///  is a new token
   /// @param _tokenName Name of the new token
   /// @param _decimalUnits Number of decimals of the new token
   /// @param _tokenSymbol Token Symbol for the new token
