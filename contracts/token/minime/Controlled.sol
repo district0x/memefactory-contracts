@@ -13,11 +13,12 @@ contract Controlled is Initializable {
 
   /* function Controlled() public { controller = msg.sender;} */
 
-  function initialize()
+  function initialize(address _controller)
     initializer
     public {
 
-    controller = msg.sender;
+    require(address(_controller) != 0x0, "Controlled: owner address can't be 0x0");
+    controller = _controller; //msg.sender;
 
   }
 

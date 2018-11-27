@@ -34,7 +34,7 @@ You need [ZeppelinOS](https://docs.zeppelinos.org/docs/start.html) comand-line i
 npm install --global zos
 ```
 
-### development
+### <a name="development">development</a?
 
 Add contracts:
 
@@ -64,29 +64,39 @@ zos push
 Deploy upgradeable instances of the contracts:
 
 ```bash
+OWNER=<address>
 DB=$(zos create meme-registry-db --init initialize)
-REGISTRY=$(zos create meme-registry --init --args $DB)
+REGISTRY=$(zos create meme-registry --init --args $DB,$OWNER)
 MINI_ME_TOKEN_FACTORY=$(zos create minime-token-factory)
-MINI_ME_TOKEN=$(zos create DANK --init --args $MINI_ME_TOKEN_FACTORY,1000000000000000000000000000)
+DANK_TOKEN=$(zos create DANK --init --args $MINI_ME_TOKEN_FACTORY,1000000000000000000000000000,$OWNER)
 MEME_TOKEN=$(zos create meme-token --init --args $REGISTRY)
-MEME_FACTORY=$(zos create meme-factory --init --args $REGISTRY,$MINI_ME_TOKEN,$MEME_TOKEN,1)
+MEME_FACTORY=$(zos create meme-factory --init --args $REGISTRY,$DANK_TOKEN,$MEME_TOKEN,1)
 ```
 
 ### Update contracts
 
-Deploy change to logic contracts:
+Deploy changes to the logic contracts:
 
 ```bash
 zos push
 ```
 
-Deploy updated instances of the contracts to interact with:
+Deploy updated instances (proxies) of the contracts to interact with:
 
 ```bash
 zos update meme-factory
 ```
 
 ## Interact with the contracts
+
+---
+
+**NOTE**
+
+When interacting with deployed contracts use a different address than that of the owner (admin) addressed used when [creating](#development) it.
+The [transparent proxy pattern](https://docs.zeppelinos.org/docs/pattern.html#transparent-proxies-and-function-clashes) posits that the calls from the admin address will not be delegated to the proxy contract holding the logic.
+
+---
 
 ```bash
 npx truffle console --network local

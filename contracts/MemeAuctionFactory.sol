@@ -2,7 +2,7 @@ pragma solidity ^0.4.24;
 
 import "./token/ERC721Receiver.sol";
 import "./MemeToken.sol";
-/* import "./proxy/Forwarder.sol"; */
+import "./proxy/Forwarder.sol";
 import "./MemeAuction.sol";
 
 contract MemeAuctionFactory is ERC721Receiver {

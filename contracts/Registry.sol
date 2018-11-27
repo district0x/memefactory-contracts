@@ -19,6 +19,15 @@ contract Registry is Initializable, DSAuth {
   EternalDb public db;
   /* bool private wasConstructed; */
 
+  bytes32 public constant challengePeriodDurationKey = sha3("challengePeriodDuration");
+  bytes32 public constant commitPeriodDurationKey = sha3("commitPeriodDuration");
+  bytes32 public constant revealPeriodDurationKey = sha3("revealPeriodDuration");
+  bytes32 public constant depositKey = sha3("deposit");
+  bytes32 public constant challengeDispensationKey = sha3("challengeDispensation");
+  bytes32 public constant voteQuorumKey = sha3("voteQuorum");
+  bytes32 public constant maxTotalSupplyKey = sha3("maxTotalSupply");
+  bytes32 public constant maxAuctionDurationKey = sha3("maxAuctionDuration");
+
   event MemeConstructedEvent(address registryEntry, uint version, address creator, bytes metaHash, uint totalSupply, uint deposit, uint challengePeriodEnd);
   event MemeMintedEvent(address registryEntry, uint version, address creator, uint tokenStartId, uint tokenEndId, uint totalMinted);
 
@@ -30,15 +39,6 @@ contract Registry is Initializable, DSAuth {
   event ChallengeRewardClaimedEvent(address registryEntry, uint version, address challenger, uint amount);
 
   event ParamChangeConstructedEvent(address registryEntry, uint version, address creator, address db, string key, uint value, uint deposit, uint challengePeriodEnd);
-
-  bytes32 public constant challengePeriodDurationKey = sha3("challengePeriodDuration");
-  bytes32 public constant commitPeriodDurationKey = sha3("commitPeriodDuration");
-  bytes32 public constant revealPeriodDurationKey = sha3("revealPeriodDuration");
-  bytes32 public constant depositKey = sha3("deposit");
-  bytes32 public constant challengeDispensationKey = sha3("challengeDispensation");
-  bytes32 public constant voteQuorumKey = sha3("voteQuorum");
-  bytes32 public constant maxTotalSupplyKey = sha3("maxTotalSupply");
-  bytes32 public constant maxAuctionDurationKey = sha3("maxAuctionDuration");
 
   /**
    * @dev Constructor for this contract.
@@ -58,7 +58,7 @@ contract Registry is Initializable, DSAuth {
   /* } */
 
   function initialize(EternalDb _db,
-                      address _owner;)
+                      address _owner)
     initializer
     public {
 
