@@ -34,7 +34,34 @@ You need [ZeppelinOS](https://docs.zeppelinos.org/docs/start.html) comand-line i
 npm install --global zos
 ```
 
-### development
+### <a name="development">Developing and contributing</a>
+
+Add contracts:
+
+```bash
+zos add DSAuth:ds-auth
+zos add DSGuard:ds-guard
+zos add EternalDb:meme-registry-db
+zos add Registry:meme-registry
+zos add App:token-factory
+zos add DankToken:DANK
+zos add MemeToken:meme-token
+zos add MemeFactory:meme-factory
+```
+
+Start session with a network called `local` (defined in truffle-config):
+
+```bash
+zos session --network local --from <address> --expires 3600
+```
+
+Deploy all the added logic contracts to the network:
+
+```bash
+zos push --force
+```
+
+### <a name="using">Using this package</a>
 
 Create a new ZeppelinOS project, and add the `memefactory-contracts` EVM package:
 
@@ -55,21 +82,19 @@ Deploy all the added logic contracts to the network (note that this step is only
 zos push --deploy-dependencies
 ```
 
-Deploy upgradeable instances of the contracts:
-
 ```bash
+OWNER=<address>
 DB=$(zos create meme-registry-db --init initialize)
-REGISTRY=$(zos create meme-registry --init --args $DB)
-MINI_ME_TOKEN_FACTORY=$(zos create minime-token-factory)
-TOKEN_FACTORY=$(zos create token-factory) && echo $TOKEN_FACTORY
-DANK_TOKEN=$(zos create DANK --init --args $TOKEN_FACTORY,1000000000000000000000000000)
+REGISTRY=$(zos create meme-registry --init --args $DB,$OWNER)
+TOKEN_FACTORY=$(zos create token-factory)
+DANK_TOKEN=$(zos create DANK --init --args $TOKEN_FACTORY,1000000000000000000000000000,$OWNER)
 MEME_TOKEN=$(zos create meme-token --init --args $REGISTRY)
 MEME_FACTORY=$(zos create meme-factory --init --args $REGISTRY,$DANK_TOKEN,$MEME_TOKEN,1)
 ```
 
-### Update contracts
+### <a name = "update">Update contracts</a>
 
-Update to a new version of the package and deploy changes to logic contracts:
+Update to a new version of the package and deploy changes to the logic contracts:
 
 ```bash
 zos link memefactory-contracts@new-version
@@ -82,7 +107,28 @@ Deploy updated instances of the contracts to interact with:
 zos update meme-factory
 ```
 
-## Interact with the contracts
+## <a name="deploy">Deploy upgradeable instances of the contracts:</a>
+
+```bash
+OWNER=<address>
+DB=$(zos create meme-registry-db --init initialize)
+REGISTRY=$(zos create meme-registry --init --args $DB,$OWNER)
+MINI_ME_TOKEN_FACTORY=$(zos create minime-token-factory)
+DANK_TOKEN=$(zos create DANK --init --args $MINI_ME_TOKEN_FACTORY,1000000000000000000000000000,$OWNER)
+MEME_TOKEN=$(zos create meme-token --init --args $REGISTRY)
+MEME_FACTORY=$(zos create meme-factory --init --args $REGISTRY,$DANK_TOKEN,$MEME_TOKEN,1)
+```
+
+## <a name="interact">Interact with the contracts</a>
+
+---
+
+**NOTE**
+
+When interacting with deployed contracts use a different address than that of the owner (admin) addressed used when [creating](#development) it.
+The [transparent proxy pattern](https://docs.zeppelinos.org/docs/pattern.html#transparent-proxies-and-function-clashes) posits that the calls from the admin address will not be delegated to the proxy contract holding the logic.
+
+---
 
 ```bash
 npx truffle console --network local

@@ -29,12 +29,13 @@ contract DSAuthEvents {
 contract DSAuth is Initializable, DSAuthEvents {
   DSAuthority  public  authority;
   address      public  owner;
-  
-  function initialize()
+
+  function initialize(address _owner)
     public
     initializer {
-    owner = msg.sender;
-    LogSetOwner(msg.sender);
+    require(address(_owner) != 0x0, "DSAuth: owner address can't be 0x0");
+    owner = _owner;
+    LogSetOwner(owner);
   }
 
   function setOwner(address owner_)

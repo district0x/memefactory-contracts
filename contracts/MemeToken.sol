@@ -20,11 +20,6 @@ contract MemeToken is Initializable, ERC721Token {
     _;
   }
 
-  /* function MemeToken(Registry _registry) */
-  /* ERC721Token("MemeToken", "MEME") */
-  /* { */
-  /*   registry = _registry; */
-  /* } */
   function initialize(Registry _registry)
     initializer
     public {
