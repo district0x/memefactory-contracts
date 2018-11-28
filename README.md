@@ -82,16 +82,6 @@ Deploy all the added logic contracts to the network (note that this step is only
 zos push --deploy-dependencies
 ```
 
-```bash
-OWNER=<address>
-DB=$(zos create meme-registry-db --init initialize)
-REGISTRY=$(zos create meme-registry --init --args $DB,$OWNER)
-TOKEN_FACTORY=$(zos create token-factory)
-DANK_TOKEN=$(zos create DANK --init --args $TOKEN_FACTORY,1000000000000000000000000000,$OWNER)
-MEME_TOKEN=$(zos create meme-token --init --args $REGISTRY)
-MEME_FACTORY=$(zos create meme-factory --init --args $REGISTRY,$DANK_TOKEN,$MEME_TOKEN,1)
-```
-
 ### <a name = "update">Update contracts</a>
 
 Update to a new version of the package and deploy changes to the logic contracts:
@@ -113,8 +103,8 @@ zos update meme-factory
 OWNER=<address>
 DB=$(zos create meme-registry-db --init initialize)
 REGISTRY=$(zos create meme-registry --init --args $DB,$OWNER)
-MINI_ME_TOKEN_FACTORY=$(zos create minime-token-factory)
-DANK_TOKEN=$(zos create DANK --init --args $MINI_ME_TOKEN_FACTORY,1000000000000000000000000000,$OWNER)
+TOKEN_FACTORY=$(zos create token-factory)
+DANK_TOKEN=$(zos create DANK --init --args $TOKEN_FACTORY,1000000000000000000000000000,$OWNER)
 MEME_TOKEN=$(zos create meme-token --init --args $REGISTRY)
 MEME_FACTORY=$(zos create meme-factory --init --args $REGISTRY,$DANK_TOKEN,$MEME_TOKEN,1)
 ```
