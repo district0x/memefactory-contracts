@@ -43,7 +43,7 @@ zos add DSAuth:ds-auth
 zos add DSGuard:ds-guard
 zos add EternalDb:meme-registry-db
 zos add Registry:meme-registry
-zos add MiniMeTokenFactory:minime-token-factory
+zos add App:token-factory
 zos add DankToken:DANK
 zos add MemeToken:meme-token
 zos add MemeFactory:meme-factory
@@ -58,7 +58,7 @@ zos session --network local --from <address> --expires 3600
 Deploy all the added logic contracts to the network:
 
 ```bash
-zos push
+zos push --force
 ```
 
 ### <a name="using">Using this package</a>
@@ -103,8 +103,8 @@ zos update meme-factory
 OWNER=<address>
 DB=$(zos create meme-registry-db --init initialize)
 REGISTRY=$(zos create meme-registry --init --args $DB,$OWNER)
-MINI_ME_TOKEN_FACTORY=$(zos create minime-token-factory)
-DANK_TOKEN=$(zos create DANK --init --args $MINI_ME_TOKEN_FACTORY,1000000000000000000000000000,$OWNER)
+TOKEN_FACTORY=$(zos create token-factory)
+DANK_TOKEN=$(zos create DANK --init --args $TOKEN_FACTORY,1000000000000000000000000000,$OWNER)
 MEME_TOKEN=$(zos create meme-token --init --args $REGISTRY)
 MEME_FACTORY=$(zos create meme-factory --init --args $REGISTRY,$DANK_TOKEN,$MEME_TOKEN,1)
 ```

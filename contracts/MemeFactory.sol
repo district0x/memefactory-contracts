@@ -12,22 +12,16 @@ import "zos-lib/contracts/Initializable.sol";
  */
 
 contract MemeFactory is Initializable, RegistryEntryFactory {
-  uint public version; // = 1;
+
+  uint public version;
   MemeToken public memeToken;
 
-  /* function MemeFactory(Registry _registry, MiniMeToken _registryToken, MemeToken _memeToken) */
-  /* RegistryEntryFactory(_registry, _registryToken) */
-  /* { */
-  /*   memeToken = _memeToken; */
-  /* } */
-
-  function initialize(
-    Registry _registry,
-    MiniMeToken _registryToken,
-    MemeToken _memeToken,
-    uint _version)
-  initializer
-  public
+  function initialize(Registry _registry,
+                      MiniMeToken _registryToken,
+                      MemeToken _memeToken,
+                      uint _version)
+    initializer
+    public
   {
 
     RegistryEntryFactory.initialize(_registry, _registryToken);

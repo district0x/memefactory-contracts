@@ -2,7 +2,6 @@ pragma solidity ^0.4.24;
 
 import "./auth/DSAuth.sol";
 import "./db/EternalDb.sol";
-/* import "./proxy/MutableForwarder.sol"; */
 import "zos-lib/contracts/Initializable.sol";
 
 /**
@@ -14,10 +13,8 @@ import "zos-lib/contracts/Initializable.sol";
  */
 
 contract Registry is Initializable, DSAuth {
-  /* address private dummyTarget; // Keep it here, because this contract is deployed as MutableForwarder */
   address public owner;
   EternalDb public db;
-  /* bool private wasConstructed; */
 
   bytes32 public constant challengePeriodDurationKey = sha3("challengePeriodDuration");
   bytes32 public constant commitPeriodDurationKey = sha3("commitPeriodDuration");
@@ -47,16 +44,6 @@ contract Registry is Initializable, DSAuth {
 
    * @param _db Address of EternalDb related to this registry
    */
-  /* function construct(EternalDb _db) */
-  /* external */
-  /* { */
-  /*   require(address(_db) != 0x0, "Registry: Address can't be 0x0"); */
-
-  /*   db = _db; */
-  /*   wasConstructed = true; */
-  /*   owner = msg.sender; */
-  /* } */
-
   function initialize(EternalDb _db,
                       address _owner)
     initializer
@@ -67,8 +54,6 @@ contract Registry is Initializable, DSAuth {
 
     db = _db;
     owner = _owner;
-    /* wasConstructed = true; */
-    /* owner = msg.sender; */
   }
 
   modifier onlyFactory() {

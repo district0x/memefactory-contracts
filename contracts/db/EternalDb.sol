@@ -17,12 +17,9 @@ contract EternalDb is Initializable, DSAuth {
 
   event EternalDbEvent(bytes32[] records, uint[] values, uint timestamp);
 
-  /* function EternalDb(){ */
-  /* } */
-
   function initialize() initializer public {
   }
-  
+
   ////////////
   //UInt
   ////////////
