@@ -1,0 +1,6 @@
+syntax: glob
+.gitignore
+zos.dev-**
+.zos.session
+.git/**
+build/**

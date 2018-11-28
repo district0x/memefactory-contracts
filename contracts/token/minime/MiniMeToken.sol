@@ -129,12 +129,14 @@ contract MiniMeToken is
                       string _tokenName,
                       uint8 _decimalUnits,
                       string _tokenSymbol,
-                      bool _transfersEnabled
+                      bool _transfersEnabled,
+                      address _controller
                       )
     initializer
-    public returns (MiniMeToken) {
+    public
+    returns (MiniMeToken) {
 
-    Controlled.initialize();
+    Controlled.initialize(_controller);
 
     tokenFactory = MiniMeTokenFactory(_tokenFactory);
     name = _tokenName;                                 // Set the name
@@ -370,20 +372,28 @@ contract MiniMeToken is
   /// @param _transfersEnabled True if transfers are allowed in the clone
   /// @return The address of the new MiniMeToken Contract
   function createCloneToken(
-    string _cloneTokenName,
-    uint8 _cloneDecimalUnits,
-    string _cloneTokenSymbol,
-    uint _snapshotBlock,
-    bool _transfersEnabled
-  ) public returns(address) {
-    if (_snapshotBlock == 0) _snapshotBlock = block.number;
+                            string _cloneTokenName,
+                            uint8 _cloneDecimalUnits,
+                            string _cloneTokenSymbol,
+                            uint _snapshotBlock,
+                            bool _transfersEnabled,
+                            address _controller
+                            )
+    public
+    returns(address) {
+
+    if (_snapshotBlock == 0) {
+      _snapshotBlock = block.number;
+    }
+
     MiniMeToken cloneToken = tokenFactory.createCloneToken(
       this,
       _snapshotBlock,
       _cloneTokenName,
       _cloneDecimalUnits,
       _cloneTokenSymbol,
-      _transfersEnabled
+      _transfersEnabled,
+      _controller
     );
 
     cloneToken.changeController(msg.sender);
@@ -569,13 +579,16 @@ contract MiniMeTokenFactory {
   /// @param _transfersEnabled If true, tokens will be able to be transferred
   /// @return The address of the new token contract
   function createCloneToken(
-    address _parentToken,
-    uint _snapshotBlock,
-    string _tokenName,
-    uint8 _decimalUnits,
-    string _tokenSymbol,
-    bool _transfersEnabled
-  ) public returns (MiniMeToken) {
+                            address _parentToken,
+                            uint _snapshotBlock,
+                            string _tokenName,
+                            uint8 _decimalUnits,
+                            string _tokenSymbol,
+                            bool _transfersEnabled,
+                            address _controller
+                            )
+    public
+    returns (MiniMeToken) {
 
     /* MiniMeToken newToken = new MiniMeToken( */
     /*   this, */
@@ -596,10 +609,11 @@ contract MiniMeTokenFactory {
       _tokenName,
       _decimalUnits,
       _tokenSymbol,
-      _transfersEnabled
+      _transfersEnabled,
+      _controller
     );
 
-    newToken.changeController(msg.sender);
+    /* newToken.changeController(msg.sender); */
     return newToken;
   }
 }

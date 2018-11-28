@@ -11,22 +11,28 @@ import "zos-lib/contracts/Initializable.sol";
 
 contract DankToken is Initializable, MiniMeToken {
 
+  address public owner;
+
   function initialize(address _tokenFactory,
-                      uint _mintedAmount)
+                      uint _mintedAmount,
+                      address _owner)
     initializer
     public {
 
-     MiniMeToken.initialize(
+    owner = _owner;
+
+    MiniMeToken.initialize(
                 _tokenFactory,
                 0x0,
                 0,
                 "Dank Token",
                 18,
                 "DANK",
-                true
+                true,
+                owner
                 );
 
-    generateTokens(msg.sender, _mintedAmount);
+    generateTokens(owner, _mintedAmount);
     changeController(0x0);
   }
 
