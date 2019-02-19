@@ -1,7 +1,7 @@
 {
   "zosversion": "2",
   "name": "memefactory-contracts",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "contracts": {
     "ds-auth": "DSAuth",
     "ds-guard": "DSGuard",

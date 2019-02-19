@@ -1,8 +1,15 @@
 {
   "name": "memefactory-contracts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MemeFactory smart contracts packaged as a reusable EVM Package",
   "author": "fbielejec",
+  "keywords": [
+    "memefactory",
+    "Solidity",
+    "ethereum",
+    "smart-contracts",
+    "zeppelinos"
+  ],
   "license": "Eclipse Public License",
   "homepage": "https://github.com/district0x/memefactory-contracts#readme",
   "repository": {
@@ -19,13 +26,15 @@
     "zos.json"
   ],
   "scripts": {
-    "ganache": "ganache-cli -p 8549",
-    "start": "npx truffle compile && npx truffle --network local exec index.js"
+    "ganache": "ganache-cli -p 8549 -l 8000000 -d -m district0x",
+    "session": "zos session --network ganache --from 0x4c3f13898913f15f12f902d6480178484063a6fb --expires 3600",
+    "push": "zos push --force",
+    "publish": "zos publish --network ganache --from 0x4c3f13898913f15f12f902d6480178484063a6fb"
   },
   "dev-dependencies": {
     "ganache-cli": "^6.1.8"
   },
   "dependencies": {
-    "zos-lib": "^2.0.1"
+    "zos-lib": "2.0.1"
   }
 }
