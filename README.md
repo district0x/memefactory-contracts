@@ -34,33 +34,6 @@ You need [ZeppelinOS](https://docs.zeppelinos.org/docs/start.html) comand-line i
 npm install --global zos
 ```
 
-### <a name="development">Developing and contributing</a>
-
-Add contracts:
-
-```bash
-zos add DSAuth:ds-auth
-zos add DSGuard:ds-guard
-zos add EternalDb:meme-registry-db
-zos add Registry:meme-registry
-zos add App:token-factory
-zos add DankToken:DANK
-zos add MemeToken:meme-token
-zos add MemeFactory:meme-factory
-```
-
-Start session with a network called `local` (defined in truffle-config):
-
-```bash
-zos session --network local --from <address> --expires 3600
-```
-
-Deploy all the added logic contracts to the network:
-
-```bash
-zos push --force
-```
-
 ### <a name="using">Using this package</a>
 
 Create a new ZeppelinOS project, and add the `memefactory-contracts` EVM package:
@@ -81,8 +54,46 @@ Deploy all the added logic contracts to the network (note that this step is only
 ```bash
 zos push --deploy-dependencies
 ```
+### <a name="development">Developing and contributing to this package</a>
 
-### <a name = "update">Update contracts</a>
+Initialize project:
+
+```bash
+zos init memefactory-contracts
+```
+
+Add contracts:
+
+```bash
+zos add DSAuth:ds-auth
+zos add DSGuard:ds-guard
+zos add EternalDb:meme-registry-db
+zos add Registry:meme-registry
+zos add App:token-factory
+zos add DankToken:DANK
+zos add MemeToken:meme-token
+zos add MemeFactory:meme-factory
+```
+
+Start session with a testrpc network called `ganache` (defined in truffle-config):
+
+```bash
+zos session --network ganache --from <address> --expires 3600
+```
+
+Deploy all the added logic contracts to the network:
+
+```bash
+zos push --force
+```
+
+Publish the contracts:
+
+```bash
+zos publish --network ganache --from <address>
+```
+
+### <a name = "update">Updating packaged contracts</a>
 
 Update to a new version of the package and deploy changes to the logic contracts:
 
@@ -121,7 +132,7 @@ The [transparent proxy pattern](https://docs.zeppelinos.org/docs/pattern.html#tr
 ---
 
 ```bash
-npx truffle console --network local
+npx truffle console --network ganache
 ```
 
 ```bash

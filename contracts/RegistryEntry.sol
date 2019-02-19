@@ -188,10 +188,6 @@ contract RegistryEntry is ApproveAndCallFallBack {
     public
     notEmergency {
 
-    /* if (_voter == 0x0) { */
-    /*   _voter = msg.sender; */
-    /* } */
-
     require(challenge.isVoteRevealPeriodOver());
     require(!challenge.isVoteRevealed(_voter));
     require(!challenge.isVoteAmountReclaimed(_voter));
@@ -218,10 +214,6 @@ contract RegistryEntry is ApproveAndCallFallBack {
     external
     notEmergency
   {
-
-    /* if (_voter == 0x0) { */
-    /*   _voter = msg.sender; */
-    /* } */
 
     require(challenge.isVoteRevealPeriodOver());
     require(!challenge.isVoteRewardClaimed(_voter));
@@ -258,6 +250,17 @@ contract RegistryEntry is ApproveAndCallFallBack {
     registry.fireChallengeRewardClaimedEvent(version,
                                              challenge.challenger,
                                              challenge.challengeReward(deposit));
+  }
+
+  /**
+   * @dev Function returns the current status of this registry entry
+   */
+  function status()
+    external
+    constant
+    returns (uint)
+  {
+    return uint(challenge.status());
   }
 
   /**
