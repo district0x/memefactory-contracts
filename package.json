@@ -29,7 +29,7 @@
     "ganache": "ganache-cli -p 8549 -l 8000000 -d -m district0x",
     "session": "zos session --network ganache --from 0x4c3f13898913f15f12f902d6480178484063a6fb --expires 3600",
     "push": "zos push --force",
-    "publish": "zos publish --network ganache --from 0x4c3f13898913f15f12f902d6480178484063a6fb"
+    "deploy": "zos publish --network ganache --from 0x4c3f13898913f15f12f902d6480178484063a6fb"
   },
   "dev-dependencies": {
     "ganache-cli": "^6.1.8"
